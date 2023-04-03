@@ -80,6 +80,13 @@ nav li a {
 	color: #E76D36;
 }
 
+.content-table tbody tr button{
+    font-size: 15px;
+    border-radius: 4px;
+    background-color: #E34234;
+    padding: 6px 12px;
+}
+
 .content-table tbody tr:nth-of-type(even){
 	background-color: #f3f3f3;
 }

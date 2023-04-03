@@ -1,25 +1,57 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
-    /* color: #fff; */
+@import url('https://fonts.googleapis.com/css2?family=Eczar&display=swap');
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
 }
+
 body{
-    display: flex;
-    height: 100vh;
-    justify-content: center;
-    align-items: center;
     background: radial-gradient(circle, transparent 25%, #403d3d  26%),linear-gradient(45deg, transparent 46%, #54535f 47%, #54535f 52%, transparent 53%), linear-gradient(135deg, transparent 46%, #54535f 47%, #54535f 52%, transparent 53%);
     background-size: 3em 3em;
     background-color: #403d3d;
     opacity: 1;
-    padding: 10px;
+}
+
+.header {
+	background-color: #54535f;
+	color: #fff;
+	padding: 20px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.header.h1{
+    color: linear-gradient(-135deg,#98979F, #E76D36);
+}
+
+nav ul {
+	display: flex;
+}
+
+nav li {
+	margin-right: 20px;
+	list-style: none;
+}
+
+nav li a {
+	color: #fff;
+	text-decoration: none;
+}
+
+.container {
+	margin: 20px;
+}
+
+.container h1{
+    font-size: 40px;
+    font-weight: 500;
+    position: relative;
+	color: #f3f3f3;
 }
 .container{
     max-width: 700px;
-    width: 100%;
     background: rgba(255, 255, 255, 0.5);
     padding: 25px 30px;
     border-radius: 5px;
@@ -29,7 +61,7 @@ body{
     font-weight: 500;
     position: relative;
 }
-.container .title::before{
+.container h1::before{
     content: '';
     position: absolute;
     left: 0;
@@ -138,4 +170,46 @@ form .button input:hover{
     .user-details::-webkit-scrollbar{
         width: 0;
     }
+}
+
+footer{
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background: #54535f;
+	height: auto;
+	width: 100vw;
+	font-family: "Open Sans";
+	padding-top: 40px;
+	color: #fff;
+}
+.footer-content{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	text-align: center;
+}
+.footer-content h3{
+	font-size: 1.8rem;
+	font-weight: 400;
+	text-transform: capitalize;
+	line-height: 3rem;
+}
+.footer-bottom{
+	background:#000;
+	width: 100vw;
+	padding: 20px 0;
+	text-align: center;
+}
+.footer-bottom p{
+	font-size: 14px;
+	word-spacing: 2px;
+	text-transform: capitalize;
+}
+.footer-bottom span{
+	text-transform: uppercase;
+	opacity: .4;
+	font-weight: 200;
 }
