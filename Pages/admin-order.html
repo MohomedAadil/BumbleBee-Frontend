@@ -8,6 +8,38 @@
     <link rel="stylesheet" href="admin-order.css">
     <title>Orders | Dashboard</title>
     <link rel="icon" href="/Images/icon.png">
+    <script>
+        fetch('http://localhost:9191/Orders')
+          .then(response => response.json())
+          .then(data => {
+            const tableBody = document.querySelector('#data-table tbody');
+            data.forEach(user => {
+              const row = document.createElement('tr');
+              const idCell = document.createElement('td');
+              const address = document.createElement('td');
+              const productname = document.createElement('td');
+              const totalamount = document.createElement('td');
+              const action = document.createElement('button')
+        
+              idCell.textContent = user.id;
+              address.textContent = user.address;
+              productname.textContent = user.productname;
+              totalamount.textContent = user.totalamount;
+              action.textContent = 'Delete Order';
+              action.setAttribute('id', 'btn-delete');
+        
+              row.appendChild(idCell);
+              row.appendChild(address);
+              row.appendChild(productname);
+              row.appendChild(totalamount);
+              row.appendChild(action);
+              tableBody.appendChild(row);
+            });
+          })
+          .catch(error => {
+            console.error('Error fetching data:', error);
+          });
+    </script>
 </head>
 
 <body>
@@ -25,30 +57,19 @@
 	</div>
 	<div class="container">
         <h1>All Orders</h1>
-		<table class="content-table">
+		<table id="data-table" class="content-table">
             <thead>
                 <tr>
                     <th>Id</th>
-                    <th>Date</th>
-                    <th>Order Date</th>
+                    <th>Address</th>
+                    <th>Product Name</th>
                     <th>Total Amount</th>
                     <th>#</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>1</td>
-                    <td>2022-03-15</td>
-                    <td>2022-03-10</td>
-                    <td>$50.00</td>
-                    <td><button>Delete</button></td>
-                </tr>
-                <tr th:each="employee : ${employees}">
-                    <td th:text="${employee.id}"></td>
-                    <td th:text="${employee.name}"></td>
-                    <td th:text="${employee.department}"></td>
-                    <td th:text="${employee.department}"></td>
-                    <td th:text="${employee.department}"></td>
+
                 </tr>
             </tbody>
         </table>

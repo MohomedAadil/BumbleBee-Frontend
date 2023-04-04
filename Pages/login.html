@@ -8,6 +8,7 @@
     <link rel="stylesheet" href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel="stylesheet">
     <title>BumbleBee | Login</title>
     <link rel="icon" href="/Images/icon.png" >
+    <script src="https://unpkg.com/unfetch"></script>
     <script src="login.js"></script>
 </head>
 <body>
@@ -27,17 +28,17 @@
                 <span>--------------------------------------------------------------------------------</span>
                 <header>Login</header>
             </div>
-            <Form id="login-form" onsubmit="handleLogin(event)">
+            <Form onsubmit="event.preventDefault(); login(this.username.value, this.password.value);">
                 <div class="input-field">
-                    <input type="text" class="input" placeholder="Username" name="username" id="username" required>
+                    <input type="text" class="input" placeholder="Username" name="username" required>
                     <i class="bx bx-user"></i>
                 </div>
                 <div class="input-field">
-                    <input type="password" class="input" placeholder="Password" name="password" id="password" required>
+                    <input type="password" class="input" placeholder="Password" name="password" required>
                     <i class="bx bx-lock-alt"></i>
                 </div>
                 <div class="input-field">
-                    <input type="submit" class="submit" value="Login" id="loginButton">
+                    <input type="submit" class="submit" value="Login">
                 </div>
             </Form>
             <div class="bottom">

@@ -40,9 +40,9 @@ nav li a {
 	text-decoration: none;
 }
 
-.container {
+/* .container {
 	margin: 20px;
-}
+} */
 
 .container h1{
     font-size: 40px;
@@ -55,6 +55,7 @@ nav li a {
     background: rgba(255, 255, 255, 0.5);
     padding: 25px 30px;
     border-radius: 5px;
+    margin: auto;
 }
 .container .title{
     font-size: 25px;

@@ -8,6 +8,57 @@
     <link rel="stylesheet" href="admin-order.css">
     <title>Customers | Dashboard</title>
     <link rel="icon" href="/Images/icon.png">
+    <script>
+
+        fetch('http://localhost:9191/allCustomers')
+          .then(response => response.json())
+          .then(data => {
+            const tableBody = document.querySelector('#data-table tbody');
+            data.forEach(user => {
+              const row = document.createElement('tr');
+              const idCell = document.createElement('td');
+              const dateofbirth = document.createElement('td');
+              const fullname = document.createElement('td');
+              const phonenumber = document.createElement('td');
+              const action = document.createElement('button')
+        
+              idCell.textContent = user.id;
+              dateofbirth.textContent = user.dateofbirth;
+              fullname.textContent = user.fullname;
+              phonenumber.textContent = user.phonenumber;
+              action.textContent = 'Delete User';
+              action.setAttribute('id', 'btn-delete');
+        
+              row.appendChild(idCell);
+              row.appendChild(dateofbirth);
+              row.appendChild(fullname);
+              row.appendChild(phonenumber);
+              row.appendChild(action);
+              tableBody.appendChild(row);
+            });
+          })
+          .catch(error => {
+            console.error('Error fetching data:', error);
+          });
+
+
+    //     fetch('http://localhost:9191/allCustomers')
+    // .then(response => response.json())
+    // .then(data => {
+    //     const tableBody = document.querySelector('#data-table tbody');
+    //     data.forEach(row => {
+    //         const tr = document.createElement('tr');
+    //         tr.innerHTML = `
+    //             <td>${row.id}</td>
+    //             <td>${row.date_of_birth}</td>
+    //             <td>${row.full_name}</td>
+    //             <td>${row.phonenumber}</td>
+    //         `;
+    //         tableBody.appendChild(tr);
+    //     });
+    // });
+
+    </script>
 </head>
 
 <body>
@@ -25,31 +76,18 @@
 	</div>
 	<div class="container">
         <h1>All Customers</h1>
-		<table class="content-table">
+		<table id="data-table" class="content-table">
             <thead>
                 <tr>
                     <th>Id</th>
-                    <th>Date</th>
-                    <th>Order Date</th>
-                    <th>Total Amount</th>
+                    <th>Date of Birth</th>
+                    <th>Full Name</th>
+                    <th>Phone Number</th>
                     <th>#</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>2022-03-15</td>
-                    <td>2022-03-10</td>
-                    <td>$50.00</td>
-                    <td><button>Delete</button></td>
-                </tr>
-                <tr th:each="employee : ${employees}">
-                    <td th:text="${employee.id}"></td>
-                    <td th:text="${employee.name}"></td>
-                    <td th:text="${employee.department}"></td>
-                    <td th:text="${employee.department}"></td>
-                    <td th:text="${employee.department}"></td>
-                </tr>
+                <tr></tr>
             </tbody>
         </table>
         
