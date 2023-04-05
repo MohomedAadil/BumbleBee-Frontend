@@ -17,23 +17,47 @@
             data.forEach(user => {
               const row = document.createElement('tr');
               const idCell = document.createElement('td');
-              const dateofbirth = document.createElement('td');
-              const fullname = document.createElement('td');
+              const dateOfBirth = document.createElement('td');
+              const fullName = document.createElement('td');
               const phonenumber = document.createElement('td');
-              const action = document.createElement('button')
+              const actionCell = document.createElement('td');
+              const actionButton = document.createElement('button');
         
               idCell.textContent = user.id;
-              dateofbirth.textContent = user.dateofbirth;
-              fullname.textContent = user.fullname;
+              dateOfBirth.textContent = user.dateOfBirth;
+              fullName.textContent = user.fullName;
               phonenumber.textContent = user.phonenumber;
-              action.textContent = 'Delete User';
-              action.setAttribute('id', 'btn-delete');
+              actionButton.textContent = 'Delete User';
+              actionButton.setAttribute('id', 'btn-delete');
+
+              actionButton.addEventListener('click', () => {
+                const orderId = user.id;
+                const confirmDelete = confirm(`Are you sure you want to delete this user account ?`);
+                if (confirmDelete) {
+                  fetch(`http://localhost:9191/deleteCustomer/${orderId}`, {
+                    method: 'DELETE'
+                  })
+                  .then(response => {
+                    if (response.ok) {
+                      row.remove();
+                      alert(`User Account deleted successfully`);
+                    } else {
+                      alert('Error deleting user');
+                    }
+                  })
+                  .catch(error => {
+                    console.error('Error deleting user:', error);
+                  });
+                }
+              });
+    
+              actionCell.appendChild(actionButton);
         
               row.appendChild(idCell);
-              row.appendChild(dateofbirth);
-              row.appendChild(fullname);
+              row.appendChild(dateOfBirth);
+              row.appendChild(fullName);
               row.appendChild(phonenumber);
-              row.appendChild(action);
+              row.appendChild(actionCell);
               tableBody.appendChild(row);
             });
           })

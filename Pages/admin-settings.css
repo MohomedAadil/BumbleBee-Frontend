@@ -214,3 +214,24 @@ footer{
 	opacity: .4;
 	font-weight: 200;
 }
+.content{
+    display: flex;
+    justify-content: space-between;
+}
+.content a{
+    font-size: 15px;
+    border-radius: 10px;
+    background-color: #98979F;
+    padding: 6px 12px;
+    width: 100px;
+    height: 40px;
+    color: #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+.content a:hover{
+    background-color: #E76D36;
+    transform: 0.3s;
+}

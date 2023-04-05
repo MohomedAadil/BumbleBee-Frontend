@@ -13,26 +13,50 @@
           .then(response => response.json())
           .then(data => {
             const tableBody = document.querySelector('#data-table tbody');
-            data.forEach(user => {
+            data.forEach(order => {
               const row = document.createElement('tr');
               const idCell = document.createElement('td');
               const address = document.createElement('td');
               const productname = document.createElement('td');
-              const totalamount = document.createElement('td');
-              const action = document.createElement('button')
+              const totalAmount = document.createElement('td');
+              const actionCell = document.createElement('td');
+              const actionButton = document.createElement('button');
         
-              idCell.textContent = user.id;
-              address.textContent = user.address;
-              productname.textContent = user.productname;
-              totalamount.textContent = user.totalamount;
-              action.textContent = 'Delete Order';
-              action.setAttribute('id', 'btn-delete');
-        
+              idCell.textContent = order.id;
+              productname.textContent = order.productname;
+              address.textContent = order.address;
+              totalAmount.textContent = order.totalAmount;
+              actionButton.textContent = 'Delete Order';
+              actionButton.setAttribute('id', order.id);
+    
+              actionButton.addEventListener('click', () => {
+                const orderId = order.id;
+                const confirmDelete = confirm(`Are you sure you want to delete this user account ?`);
+                if (confirmDelete) {
+                  fetch(`http://localhost:9191/deleteOrder/${orderId}`, {
+                    method: 'DELETE'
+                  })
+                  .then(response => {
+                    if (response.ok) {
+                      row.remove();
+                      alert(`User Account deleted successfully`);
+                    } else {
+                      alert('Error deleting user');
+                    }
+                  })
+                  .catch(error => {
+                    console.error('Error deleting user:', error);
+                  });
+                }
+              });
+    
+              actionCell.appendChild(actionButton);
+    
               row.appendChild(idCell);
-              row.appendChild(address);
               row.appendChild(productname);
-              row.appendChild(totalamount);
-              row.appendChild(action);
+              row.appendChild(address);
+              row.appendChild(totalAmount);
+              row.appendChild(actionCell);
               tableBody.appendChild(row);
             });
           })

@@ -8,6 +8,62 @@
     <link rel="stylesheet" href="admin-products.css">
     <title>Products | Dashboard</title>
     <link rel="icon" href="/Images/icon.png">
+    <Script>
+                fetch('http://localhost:9191/Products')
+          .then(response => response.json())
+          .then(data => {
+            const tableBody = document.querySelector('#data-table tbody');
+            data.forEach(order => {
+              const row = document.createElement('tr');
+              const idCell = document.createElement('td');
+              const name = document.createElement('td');
+              const quantity = document.createElement('td');
+              const price = document.createElement('td');
+              const actionCell = document.createElement('td');
+              const actionButton = document.createElement('button');
+        
+              idCell.textContent = order.id;
+              name.textContent = order.name;
+              quantity.textContent = order.quantity;
+              price.textContent = order.price;
+              actionButton.textContent = 'Delete Product';
+              actionButton.setAttribute('id', order.id);
+    
+              actionButton.addEventListener('click', () => {
+                const orderId = order.id;
+                const confirmDelete = confirm(`Are you sure you want to delete this user account ?`);
+                if (confirmDelete) {
+                  fetch(`http://localhost:9191/deleteProduct/${orderId}`, {
+                    method: 'DELETE'
+                  })
+                  .then(response => {
+                    if (response.ok) {
+                      row.remove();
+                      alert(`User Account deleted successfully`);
+                    } else {
+                      alert('Error deleting user');
+                    }
+                  })
+                  .catch(error => {
+                    console.error('Error deleting user:', error);
+                  });
+                }
+              });
+    
+              actionCell.appendChild(actionButton);
+    
+              row.appendChild(idCell);
+              row.appendChild(name);
+              row.appendChild(quantity);
+              row.appendChild(price);
+              row.appendChild(actionCell);
+              tableBody.appendChild(row);
+            });
+          })
+          .catch(error => {
+            console.error('Error fetching data:', error);
+          });
+    </Script>
 </head>
 
 <body>
@@ -25,7 +81,7 @@
 	</div>
 	<div class="container">
         <h1>All Products</h1>
-		<table class="content-table">
+		<table class="content-table" id="data-table">
             <thead>
                 <tr>
                     <th>Id</th>
@@ -37,24 +93,7 @@
             </thead>
             <tbody>
                 <tr>
-                    <td>1</td>
-                    <td>2022-03-15</td>
-                    <td>2022-03-10</td>
-                    <td>$50.00</td>
-                    <td><button>Delete</button></td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>2022-03-15</td>
-                    <td>2022-03-10</td>
-                    <td>$50.00</td>
-                    <td><button>Delete</button></td>
-                </tr>
-                <tr th:each="employee : ${employees}">
-                    <td th:text="${employee.id}"></td>
-                    <td th:text="${employee.name}"></td>
-                    <td th:text="${employee.department}"></td>
-                    <td th:text="${employee.department}"></td>
+
                 </tr>
             </tbody>
         </table>
