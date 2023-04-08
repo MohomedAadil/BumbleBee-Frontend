@@ -6,35 +6,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
     <link rel="stylesheet" href="admin-order.css">
-    <title>Customers | Dashboard</title>
+    <title>Installments | Dashboard</title>
     <link rel="icon" href="/Images/icon.png">
     <script>
 
-        fetch('http://localhost:9191/allCustomers')
+        fetch('http://localhost:9191/getAllInstall')
           .then(response => response.json())
           .then(data => {
             const tableBody = document.querySelector('#data-table tbody');
             data.forEach(user => {
               const row = document.createElement('tr');
               const idCell = document.createElement('td');
-              const dateOfBirth = document.createElement('td');
-              const fullName = document.createElement('td');
-              const phonenumber = document.createElement('td');
+              const creditor = document.createElement('td');
+              const loanBalance = document.createElement('td');
+              const usedAmount = document.createElement('td');
+              const installmentPlan = document.createElement('td');
               const actionCell = document.createElement('td');
               const actionButton = document.createElement('button');
         
               idCell.textContent = user.id;
-              dateOfBirth.textContent = user.dateOfBirth;
-              fullName.textContent = user.fullName;
-              phonenumber.textContent = user.phonenumber;
-              actionButton.textContent = 'Delete Customer';
+              creditor.textContent = user.customerid;
+              loanBalance.textContent = user.loanBalance;
+              usedAmount.textContent = user.usedAmount;
+              installmentPlan.textContent = user.installmentPlan;
+              actionButton.textContent = 'Delete Installment';
               actionButton.setAttribute('id', 'btn-delete');
 
               actionButton.addEventListener('click', () => {
                 const orderId = user.id;
                 const confirmDelete = confirm(`Are you sure you want to delete this user account ?`);
                 if (confirmDelete) {
-                  fetch(`http://localhost:9191/deleteCustomer/${orderId}`, {
+                  fetch(`http://localhost:9191/deleteInstall/${orderId}`, {
                     method: 'DELETE'
                   })
                   .then(response => {
@@ -54,9 +56,10 @@
               actionCell.appendChild(actionButton);
         
               row.appendChild(idCell);
-              row.appendChild(dateOfBirth);
-              row.appendChild(fullName);
-              row.appendChild(phonenumber);
+              row.appendChild(creditor);
+              row.appendChild(loanBalance);
+              row.appendChild(usedAmount);
+              row.appendChild(installmentPlan);
               row.appendChild(actionCell);
               tableBody.appendChild(row);
             });
@@ -94,20 +97,21 @@
 				<li><a href="admin-products.html">Products</a></li>
 				<li><a href="admin-order.html">Orders</a></li>
 				<li><a href="admin-customer.html">Customers</a></li>
-        <li><a href="admin-Install.html">Installments</a></li>
+                <li><a href="admin-Install.html">Installments</a></li>
 				<li><a href="admin-settings.html">Settings</a></li>
 			</ul>
 		</nav>
 	</div>
 	<div class="container">
-        <h1>All Customers</h1>
+        <h1>All Installments</h1>
 		<table id="data-table" class="content-table">
             <thead>
                 <tr>
                     <th>Id</th>
-                    <th>Date of Birth</th>
-                    <th>Full Name</th>
-                    <th>Phone Number</th>
+                    <th>Creditor</th>
+                    <th>Loan Balance</th>
+                    <th>Used Amount</th>
+                    <th>Installment Plan</th>
                     <th>#</th>
                 </tr>
             </thead>
